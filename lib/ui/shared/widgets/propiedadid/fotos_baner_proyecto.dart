@@ -1,0 +1,78 @@
+import 'package:somosproperties/constants.dart';
+import 'package:somosproperties/providers/proyectoId_carrousel_provider.dart';
+import 'package:somosproperties/ui/cards/white_card.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class FotoBanerProyecto extends StatefulWidget {
+  final String fotoBaner;
+  final List<String> galeria;
+
+  const FotoBanerProyecto({
+    Key? key,
+    required this.fotoBaner,
+    required this.galeria,
+  }) : super(key: key);
+
+  @override
+  State<FotoBanerProyecto> createState() => _FotoBanerProyectoState();
+}
+
+class _FotoBanerProyectoState extends State<FotoBanerProyecto> {
+  @override
+  Widget build(BuildContext context) {
+    final _carrContr = Provider.of<ProyectoCarrouselProvider>(context).proyCarrouselCntrl;
+    final carrProvider = Provider.of<ProyectoCarrouselProvider>(context);
+    return (widget.galeria.length == 0) 
+    
+    ? Container(
+      height: 300,
+      child: Center(child: CircularProgressIndicator()))
+    
+    : Column(
+      children: [
+        WhiteCard(
+          isDrag: true,
+            child: CarouselSlider.builder(
+                carouselController: _carrContr,
+                itemCount: widget.galeria.length,
+                itemBuilder: (context, index, realIndex) => Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(widget.galeria[index])),
+                options: CarouselOptions(
+                  viewportFraction: 1,
+                  enlargeCenterPage: true,
+                  initialPage: carrProvider.currIndxProy,
+                  onPageChanged: (index, reason) => index,
+                ))),
+        WhiteCard(
+          isDrag: true,
+            child: Container(
+                height: 100,
+                child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.galeria.length,
+                itemBuilder: (context, index) => Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                        onTap: () {
+                          carrProvider.gotoProy(index);
+                        },
+                        child: Image(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(widget.galeria[index]))),
+                  ),
+                ),
+              ),))
+      ],
+    );
+  }
+}
+
+
+
+
