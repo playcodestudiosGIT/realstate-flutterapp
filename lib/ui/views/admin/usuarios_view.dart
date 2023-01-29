@@ -4,7 +4,6 @@ import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/datatables/users_datasource.dart';
 import 'package:somosproperties/models/usuario.dart';
 import 'package:somosproperties/providers/users_provider.dart';
-import 'package:somosproperties/services/picker_image.dart';
 
 import 'package:somosproperties/ui/labels/custom_labels.dart';
 import 'package:somosproperties/ui/modals/users_modal.dart';

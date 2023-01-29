@@ -7,7 +7,7 @@ class SomospApi {
 
   static void configureDio() {
     //Base URL
-    _dio.options.baseUrl = 'https://somosp.herokuapp.com/api';
+    _dio.options.baseUrl = 'https://www.somosproperties.com/api';
     // 'http://localhost:8080/api';
 
     // Conf Header
@@ -31,7 +31,6 @@ class SomospApi {
 
   static Future post(String path, Map<String, dynamic> data) async {
     final formData = FormData.fromMap(data);
-
     try {
       final resp = await _dio.post(path, data: formData);
 

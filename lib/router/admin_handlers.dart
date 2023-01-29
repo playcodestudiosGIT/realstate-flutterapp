@@ -1,10 +1,10 @@
 import 'package:somosproperties/providers/auth_provider.dart';
 import 'package:somosproperties/providers/sidemenu_provider.dart';
 import 'package:somosproperties/router/router.dart';
-import 'package:somosproperties/ui/views/menu/proys_edit_view.dart';
-import 'package:somosproperties/ui/views/menu/usuarios_view.dart';
+import 'package:somosproperties/ui/views/admin/proys_edit_view.dart';
+import 'package:somosproperties/ui/views/admin/usuarios_view.dart';
 import 'package:somosproperties/ui/views/mi_cuenta/seguridad_view.dart';
-import 'package:somosproperties/ui/views/menu/props_edit_view.dart';
+import 'package:somosproperties/ui/views/admin/props_edit_view.dart';
 import 'package:somosproperties/ui/views/mi_cuenta/configuracion_view.dart';
 import 'package:somosproperties/ui/views/system/main_view.dart';
 import 'package:fluro/fluro.dart';
