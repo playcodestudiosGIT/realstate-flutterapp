@@ -35,7 +35,7 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  createUser(String name, String email, String password, String rol) {
+  createUser(String? name, String? email, String? password, String? rol) {
     final data = {
       "nombre": name,
       "correo": email,
@@ -53,14 +53,12 @@ class UsersProvider extends ChangeNotifier {
     });
   }
 
-  Future updateUser(String pass, Usuario user) async {
+  Future updateUser(String? pass, Usuario user) async {
     final data = {
       "nombre": user.nombre,
       "correo": user.correo,
       "password": pass,
       "rol": user.rol,
-      "img":
-          'https://res.cloudinary.com/dnejayiiq/image/upload/v1671851591/no-image_xb946x.jpg',
     };
 
     try {
@@ -89,9 +87,11 @@ class UsersProvider extends ChangeNotifier {
       );
 
       notifyListeners();
+      return true;
     } catch (e) {
       print('Error en el delete user');
     }
+    return false;
   }
 
   Future updateImge(String id, file) async {

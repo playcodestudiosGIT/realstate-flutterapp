@@ -143,7 +143,7 @@ class _UserForm extends StatelessWidget {
                       color: Colors.white,
                     ),
                     Text(
-                      '   Guardar',
+                      '  Guardar',
                       style: TextStyle(color: Colors.white),
                     )
                   ],
@@ -168,14 +168,14 @@ class _Avatar extends StatefulWidget {
 class _AvatarState extends State<_Avatar> {
   @override
   Widget build(BuildContext context) {
-    final usersProvider = Provider.of<UsersProvider>(context);
-    final users = Provider.of<UsersProvider>(context).users;
+    // final usersProvider = Provider.of<UsersProvider>(context);
+    // final users = Provider.of<UsersProvider>(context).users;
     final authProvider = Provider.of<AuthProvider>(context);
 
     return WhiteCard(
       isDrag: false,
       title: 'Perfil',
-      width: 250,
+      width: 350,
       child: Container(
         width: double.infinity,
         child: Column(

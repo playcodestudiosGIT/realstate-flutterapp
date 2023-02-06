@@ -73,7 +73,7 @@ class _PropiedadCardState extends State<PropiedadCard> {
                 Row(
                   children: [
                     Container(
-                      width: 230,
+                      width: 240,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -94,6 +94,7 @@ class _PropiedadCardState extends State<PropiedadCard> {
                               Icon(
                                 Icons.location_on,
                                 color: kPrimaryColor,
+                                size: 16,
                               ),
                               LinkText(
                                   text: '${widget.propiedad.proyecto.nombre}',

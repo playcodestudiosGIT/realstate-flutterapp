@@ -26,10 +26,9 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
-    final List<Proyecto> listProy =
-        Provider.of<ProyectosProvider>(context).proyectos;
+    final proyectosProvider = Provider.of<ProyectosProvider>(context);
 
-    final destrProy = listProy.map(
+    final destrProy = proyectosProvider.proyectos.map(
       (e) => Padding(
         padding: const EdgeInsets.only(
             right: kDefaultPadding, left: kDefaultPadding),
@@ -91,17 +90,21 @@ class _MainViewState extends State<MainView> {
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () {
                       NavigationService.navigateTo(
-                          '/proyectos/${listProy[index].uid}');
+                          '/proyectos/${proyectosProvider.proyectos[index].uid}');
                     },
                     child: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: Padding(
                         padding: const EdgeInsets.only(left: kDefaultPadding),
                         child: Image(
-                            image: (listProy[index].img == '')
+                            fit: BoxFit.cover,
+                            width: 150,
+                            image: (proyectosProvider.proyectos[index].img ==
+                                    '')
                                 ? NetworkImage(
                                     'https://res.cloudinary.com/dnejayiiq/image/upload/v1672446892/logo_hnizxp.png')
-                                : NetworkImage(listProy[index].img)),
+                                : NetworkImage(
+                                    proyectosProvider.proyectos[index].img)),
                       ),
                     ),
                   ),

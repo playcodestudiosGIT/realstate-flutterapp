@@ -5,61 +5,63 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somosproperties/api/somosp_api.dart';
 import 'package:somosproperties/constants.dart';
-import 'package:somosproperties/models/http/propiedad_response.dart';
-import 'package:somosproperties/models/propiedad.dart';
+import 'package:somosproperties/models/http/proyectos_response.dart';
+import 'package:somosproperties/models/proyecto.dart';
 
-import 'package:somosproperties/providers/propiedades_provides.dart';
-import 'package:somosproperties/providers/users_provider.dart';
+import 'package:somosproperties/providers/proyectos_provider.dart';
 import 'package:somosproperties/services/notification_service.dart';
 import 'package:somosproperties/ui/cards/white_card.dart';
-import 'package:somosproperties/ui/modals/galery_edit.dart';
-import 'package:somosproperties/ui/modals/prop_dialog.dart';
+import 'package:somosproperties/ui/modals/galery_edit_proy.dart';
+import 'package:somosproperties/ui/modals/proy_dialog.dart';
 
-class PropsDTS extends DataTableSource {
+class ProysDTS extends DataTableSource {
   final BuildContext context;
 
-  PropsDTS(this.context);
+  ProysDTS(this.context);
 
   @override
   DataRow getRow(int index) {
-    final propiedadesProvider = Provider.of<PropiedadesProvider>(this.context);
-    final propiedad = propiedadesProvider.listpropiedades[index];
+    final proyectosProvider = Provider.of<ProyectosProvider>(context);
+    final Proyecto proyecto = proyectosProvider.proyectos[index];
 
     return DataRow.byIndex(index: index, cells: [
-      DataCell(Text(propiedad.sevendeoalquila)),
-      DataCell(Text(propiedad.tipopropiedad)),
-      DataCell(Text(propiedad.proyecto.nombre)),
+      DataCell(Text(proyecto.nombre)),
+      DataCell(Text(proyecto.direccion)),
+      DataCell(Text(proyecto.ciudadPais)),
 
       DataCell(
         Container(
           margin: EdgeInsets.all(4),
           width: 70,
           child: Image(
-              fit: BoxFit.cover,
-              width: 50,
-              image: NetworkImage(propiedad.img ??
-                  'https://res.cloudinary.com/dnejayiiq/image/upload/v1671851591/no-image_xb946x.jpg')),
+              fit: BoxFit.cover, width: 50, image: NetworkImage(proyecto.img)),
         ),
         showEditIcon: true,
-        onTap: () async => await pickImage(context, propiedad.uid.toString()),
-      ),
-      DataCell(
-        Text(propiedad.nombreProp),
+        onTap: () async => await pickImage(context, proyecto.uid.toString()),
       ),
       DataCell(Container(
           constraints: BoxConstraints(minWidth: 100, maxWidth: 300),
-          child: Text(propiedad.direccion))),
+          child: Text(proyecto.descripcion))),
+      DataCell(Container(
+          constraints: BoxConstraints(minWidth: 100, maxWidth: 300),
+          child: Text(proyecto.detalles))),
       // DataCell(Text(propiedad.direccion)),
       DataCell(Container(
           constraints: BoxConstraints(minWidth: 150, maxWidth: 400),
           child: Text(
-            propiedad.descripcion,
+            proyecto.amenidades,
             maxLines: 3,
           ))),
       DataCell(Container(
           constraints: BoxConstraints(minWidth: 150, maxWidth: 400),
           child: Text(
-            propiedad.detalles,
+            proyecto.video,
+            maxLines: 3,
+          ))),
+      DataCell(Container(
+          constraints: BoxConstraints(minWidth: 150, maxWidth: 400),
+          child: Text(
+            proyecto.brochure,
             maxLines: 3,
           ))),
       DataCell(
@@ -73,14 +75,14 @@ class PropsDTS extends DataTableSource {
             SizedBox(
               width: kDefaultPadding,
             ),
-            Text('${propiedad.galeria.length.toString()} '),
+            Text('${proyecto.galeria.length.toString()} '),
           ],
         ),
         showEditIcon: true,
         onTap: () {
           showDialog(
             context: context,
-            builder: (context) => GaleryEdit(propiedad: propiedad),
+            builder: (context) => GaleryEditProy(proyecto: proyecto),
           );
         },
       ),
@@ -89,50 +91,20 @@ class PropsDTS extends DataTableSource {
           IconButton(
               onPressed: () {
                 final dialog = AlertDialog(
-                  title: Text('Editar propiedad'),
+                  title: Text('Editar proyecto'),
                   content: Container(
-                      child: PropEditDialog(
-                    propiedad: propiedad, //
+                      child: ProyEditDialog(
+                    proyecto: proyecto, //
                   )),
                   actions: [
                     TextButton(
-                        onPressed: () async {
-                          final data = {
-                            "nombreProp": propiedadesProvider.prop.nombreProp,
-                            "direccion": propiedadesProvider.prop.direccion,
-                            "detalles": propiedadesProvider.prop.detalles,
-                            "sevendeoalquila":
-                                propiedadesProvider.prop.sevendeoalquila,
-                            "tipopropiedad":
-                                propiedadesProvider.prop.tipopropiedad,
-                            "mts2": propiedadesProvider.prop.mts2,
-                            "proyecto": propiedadesProvider.idProyPropNew,
-                            "descripcion": propiedadesProvider.prop.descripcion,
-                            "habitaciones":
-                                propiedadesProvider.prop.habitaciones,
-                            "precio": propiedadesProvider.prop.precio,
-                            "banos": propiedadesProvider.prop.banos,
-                            "altura": propiedadesProvider.prop.altura,
-                            "estacionamientos":
-                                propiedadesProvider.prop.estacionamientos,
-                          };
-                          try {
-                            final resp = await SomospApi.put(
-                                '/propiedades/${propiedad.uid}', data);
-
-                            Navigator.of(context).pop();
-                            propiedadesProvider.notifyListeners();
-                            NotificationService.showSnackbarError(
-                                msg: 'Propiedad Editada', color: Colors.green);
-                          } catch (e) {
-                            NotificationService.showSnackbarError(
-                                msg: 'ERROR Editando Propiedad',
-                                color: Colors.red);
-                          }
-                        },
+                        onPressed: () async => proyectosProvider
+                            .updateProy(proyecto.uid)
+                            .then((_) => Navigator.of(context).pop())
+                            .then((_) => proyectosProvider.notifyListeners()),
                         child: Text('Editar')),
                     TextButton(
-                        onPressed: () async {
+                        onPressed: () {
                           Navigator.of(context).pop();
                         },
                         child: Text('Descartar'))
@@ -153,7 +125,7 @@ class PropsDTS extends DataTableSource {
                 final dialog = AlertDialog(
                   title: Text('Esta seguro de borrar'),
                   content: Text(
-                      'Borrar definitivamente la propiedad "${propiedad.nombreProp}"'),
+                      'Borrar definitivamente la propiedad "${proyecto.nombre}"'),
                   actions: [
                     TextButton(
                         onPressed: () {
@@ -162,26 +134,14 @@ class PropsDTS extends DataTableSource {
                         child: Text('No')),
                     TextButton(
                         onPressed: () async {
-                          //BORRAR propiedad
-                          try {
-                            await Provider.of<PropiedadesProvider>(context,
-                                    listen: false)
-                                .deleteProp(propiedad.uid.toString());
-                            Provider.of<PropiedadesProvider>(context,
-                                    listen: false)
-                                .notify();
-                            Navigator.of(context).pop();
-                            NotificationService.showSnackbarError(
-                                msg:
-                                    'Propiedad "${propiedad.nombreProp}" eliminada',
-                                color: Colors.green);
-                          } catch (e) {
-                            NotificationService.showSnackbarError(
-                                msg:
-                                    'ERROR eliminando "${propiedad.nombreProp}"',
-                                color: Colors.red);
-                            print(e);
-                          }
+                          //BORRAR USUARIO
+                          await Provider.of<ProyectosProvider>(context,
+                                  listen: false)
+                              .deleteProy(proyecto.uid.toString());
+                          // Provider.of<ProyectosProvider>(context,
+                          //         listen: false)
+                          //     .notify();
+                          Navigator.of(context).pop();
                         },
                         child: Text('Si, Borrar'))
                   ],
@@ -205,8 +165,7 @@ class PropsDTS extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount =>
-      Provider.of<PropiedadesProvider>(context).listpropiedades.length;
+  int get rowCount => Provider.of<ProyectosProvider>(context).proyectos.length;
 
   @override
   int get selectedRowCount => 0;
@@ -278,22 +237,24 @@ class PropsDTS extends DataTableSource {
                         ))))));
       }
 
-      final lista = Provider.of<PropiedadesProvider>(context, listen: false)
-          .listpropiedades;
+      final lista =
+          Provider.of<ProyectosProvider>(context, listen: false).proyectos;
       final resp =
-          await SomospApi.editPropImg('/uploads/propiedades/$id', file.bytes!);
-      final prop = PropiedadResponse.fromJson(jsonDecode(resp.toString()));
+          await SomospApi.editPropImg('/uploads/proyectos/$id', file.bytes!);
+      final proy = Proyecto.fromMap(resp);
+      print(proy);
+
       final newList = lista.map(
         (p) {
           if (p.uid != id) return p;
-          p.img = prop.img;
+          p.img = proy.img;
           return p;
         },
       ).toList();
 
-      Provider.of<PropiedadesProvider>(context, listen: false).listpropiedades =
+      Provider.of<ProyectosProvider>(context, listen: false).proyectos =
           newList;
-      Provider.of<PropiedadesProvider>(context, listen: false).notify();
+      Provider.of<ProyectosProvider>(context, listen: false).notifyListeners();
       NotificationService.showSnackbarError(
           msg: 'Imagen cambiada con exito', color: Colors.green);
     } else {

@@ -79,10 +79,20 @@ class UsersDTS extends DataTableSource {
                     TextButton(
                         onPressed: () async {
                           //BORRAR USUARIO
-                          await Provider.of<UsersProvider>(context,
+                          final isDelete = await Provider.of<UsersProvider>(
+                                  context,
                                   listen: false)
                               .deleteUser(user.uid.toString());
                           Navigator.of(context).pop();
+                          if (isDelete) {
+                            NotificationService.showSnackbarError(
+                                msg: 'Usuario "${user.nombre}" Eliminado',
+                                color: Colors.green);
+                          } else {
+                            NotificationService.showSnackbarError(
+                                msg: 'Error Eliminando Usuario',
+                                color: Colors.red);
+                          }
                         },
                         child: Text('Si, Borrar'))
                   ],
@@ -148,7 +158,6 @@ class UsersDTS extends DataTableSource {
                         ],
                       ))))),
         );
-        // print('extension no permitida');
       }
       if (file.size > 1000000) {
         showDialog(

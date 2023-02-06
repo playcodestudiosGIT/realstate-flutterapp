@@ -16,20 +16,20 @@ class UsersModal extends StatefulWidget {
 }
 
 class _UsersModalState extends State<UsersModal> {
-  late String nombre;
-  late String correo;
-  late String clave;
-  late String rol;
+  late String? nombre;
+  late String? correo;
+  late String? clave;
+  late String? rol;
   String? id;
 
   @override
   void initState() {
     super.initState();
     id = widget.user?.uid;
-    nombre = widget.user?.nombre ?? '';
-    correo = widget.user?.correo ?? '';
+    nombre = widget.user?.nombre;
+    correo = widget.user?.correo;
     clave = '';
-    rol = widget.user?.rol ?? 'USER_ROLE';
+    rol = widget.user?.rol;
   }
 
   @override
@@ -184,9 +184,9 @@ class _UsersModalState extends State<UsersModal> {
                             // Actualizar
                             final user = Usuario(
                               uid: this.id,
-                              nombre: this.nombre,
-                              correo: this.correo,
-                              rol: this.rol,
+                              nombre: this.nombre ?? '',
+                              correo: this.correo ?? '',
+                              rol: this.rol ?? 'USER_ROLE',
                             );
                             await usersProvider.updateUser(this.clave, user);
                             NotificationService.showSnackbarError(

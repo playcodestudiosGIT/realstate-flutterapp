@@ -7,8 +7,9 @@ class SomospApi {
 
   static void configureDio() {
     //Base URL
-    _dio.options.baseUrl = 'https://www.somosproperties.com/api';
-    // 'http://localhost:8080/api';
+    _dio.options.baseUrl =
+        // 'https://www.somosproperties.com/api';
+        'http://localhost:8080/api';
 
     // Conf Header
     _dio.options.headers = {
@@ -89,7 +90,60 @@ class SomospApi {
       return resp;
     } on DioError catch (e) {
       print(e);
+      throw ('Error en el PUT ACT IMG USER$e');
+    }
+  }
+
+  static Future editFotoGalery(String path, Uint8List bytes) async {
+    final formData =
+        FormData.fromMap({'archivo': MultipartFile.fromBytes(bytes)});
+
+    try {
+      final resp = await _dio.put(path, data: formData);
+      return resp;
+    } on DioError catch (e) {
+      print(e);
+      throw ('Error en el PUT ACT prop galery $e');
+    }
+  }
+
+  static Future editPropImg(String path, bytes) async {
+    if (bytes is Uint8List) {
+      try {
+        final formData =
+            FormData.fromMap({'archivo': MultipartFile.fromBytes(bytes)});
+        final resp = await _dio.put(path, data: formData);
+        return resp.data;
+      } on DioError catch (e) {
+        print(e);
+        throw ('Error en el PUT ACT IMG PROP $e');
+      }
+    }
+    return bytes;
+  }
+
+  static Future deleteImageGalery(String path) async {
+    try {
+      final resp = await _dio.delete(path);
+      return resp.data;
+    } on DioError catch (e) {
+      print(e);
       throw ('Error en el PUT $e');
     }
+  }
+
+  static Future addPhoto(String path, bytes) async {
+    if (bytes is Uint8List) {
+      try {
+        final formData =
+            FormData.fromMap({'archivo': MultipartFile.fromBytes(bytes)});
+        final resp = await _dio.post(path, data: formData);
+        return resp;
+      } on DioError catch (e) {
+        print(e);
+        throw ('Error en el PUT ACT IMG PROP $e');
+      }
+    }
+    return bytes;
   }
 }

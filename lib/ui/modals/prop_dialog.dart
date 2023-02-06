@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/models/propiedad.dart';
 import 'package:somosproperties/models/proyecto.dart';
+import 'package:somosproperties/providers/propiedades_provides.dart';
 import 'package:somosproperties/providers/proyectos_provider.dart';
 import 'package:somosproperties/ui/inputs/custom_inputs.dart';
 import 'package:somosproperties/ui/labels/custom_labels.dart';
@@ -19,66 +22,67 @@ class _PropEditDialogState extends State<PropEditDialog> {
   late String nombreProp;
   late String direccion;
   late String detalles;
+  late String descripcion;
+  late String banos;
+  late String habitaciones;
+  late String estacionamientos;
+  late String mts2;
   late String sevendeoalquila;
   late String tipopropiedad;
-  late String mts2;
   late String proyecto;
-  late String descripcion;
-  late String img;
-  late String habitaciones;
   late int precio;
-  late String banos;
   late String altura;
-  late String estacionamientos;
-  late List galeria;
   late String? id;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    nombreProp = widget.propiedad?.nombreProp ?? ''; //
-    direccion = widget.propiedad?.direccion ?? ''; //
-    detalles = widget.propiedad?.detalles ?? ''; //
-    sevendeoalquila = widget.propiedad?.sevendeoalquila ?? 'Venta'; //
-    tipopropiedad = widget.propiedad?.tipopropiedad ?? ''; //
-    mts2 = widget.propiedad?.mts2 ?? ''; //
-    proyecto = widget.propiedad?.proyecto.nombre ?? ''; //
-    descripcion = widget.propiedad?.descripcion ?? ''; //
-    img = widget.propiedad?.img ??
-        'https://res.cloudinary.com/dnejayiiq/image/upload/v1674159080/noavatar_oesi6a.png';
-    habitaciones = widget.propiedad?.habitaciones ?? ''; //
-    precio = widget.propiedad?.precio ?? 0; //
-    banos = widget.propiedad?.banos ?? ''; //
-    altura = widget.propiedad?.altura ?? '';
-    estacionamientos = widget.propiedad?.estacionamientos ?? ''; //
-    galeria = widget.propiedad?.galeria ?? [];
     id = widget.propiedad?.uid;
+    if (widget.propiedad != null) {
+      Provider.of<PropiedadesProvider>(context, listen: false).prop =
+          widget.propiedad!;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final List<Proyecto> proyectos =
         Provider.of<ProyectosProvider>(context).proyectos;
+    final propiedadesProvider = Provider.of<PropiedadesProvider>(context);
     return Container(
       width: 380,
       height: 600,
       child: Column(
         children: [
           TextFormField(
-            decoration: customInputDecoration(label: 'Nombre de Propiedad'),
+            initialValue: widget.propiedad?.nombreProp ??
+                propiedadesProvider.prop.nombreProp,
+            onChanged: (value) => propiedadesProvider.prop.nombreProp = value,
+            decoration: InputDecoration(label: Text('Nombre de la Propiedad')),
           ),
           TextFormField(
-            decoration: customInputDecoration(label: 'Dirección de Propiedad'),
+            initialValue: widget.propiedad?.direccion ??
+                propiedadesProvider.prop.direccion,
+            onChanged: (value) => propiedadesProvider.prop.direccion = value,
+            decoration:
+                InputDecoration(label: Text('Dirección de la Propiedad')),
           ),
           TextFormField(
-            maxLines: 3,
-            decoration: customInputDecoration(label: 'Detalles de Propiedad'),
-          ),
-          TextFormField(
+            initialValue: widget.propiedad?.descripcion ??
+                propiedadesProvider.prop.descripcion,
+            onChanged: (value) => propiedadesProvider.prop.descripcion = value,
             maxLines: 3,
             decoration:
-                customInputDecoration(label: 'Descripción de Propiedad'),
+                InputDecoration(label: Text('Descripción de la Propiedad')),
+          ),
+          TextFormField(
+            initialValue:
+                widget.propiedad?.detalles ?? propiedadesProvider.prop.detalles,
+            onChanged: (value) => propiedadesProvider.prop.detalles = value,
+            maxLines: 3,
+            decoration:
+                InputDecoration(label: Text('Detalles de la Propiedad')),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -86,9 +90,19 @@ class _PropEditDialogState extends State<PropEditDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 DropdownButton(
-                  // isExpanded: true,
-                  value: '1',
+                  value:
+                      widget.propiedad?.banos ?? propiedadesProvider.prop.banos,
+                  onChanged: (value) {
+                    setState(() {
+                      this.banos = value.toString();
+                      propiedadesProvider.prop.banos = value.toString();
+                    });
+                  },
                   items: [
+                    DropdownMenuItem(
+                      child: Text('Baños'),
+                      value: '',
+                    ),
                     DropdownMenuItem(
                       child: Text('1 Baño'),
                       value: '1',
@@ -107,15 +121,22 @@ class _PropEditDialogState extends State<PropEditDialog> {
                     ),
                     DropdownMenuItem(
                       child: Text('5+ Baños'),
-                      value: '5',
+                      value: '5+',
                     ),
                   ],
-                  onChanged: (value) {},
                 ),
                 DropdownButton(
-                  // isExpanded: true,
-                  value: '1',
+                  value: widget.propiedad?.habitaciones ??
+                      propiedadesProvider.prop.habitaciones,
+                  onChanged: (value) => setState(() {
+                    propiedadesProvider.prop.habitaciones = value.toString();
+                    this.habitaciones = value.toString();
+                  }),
                   items: [
+                    DropdownMenuItem(
+                      child: Text('Habs'),
+                      value: '',
+                    ),
                     DropdownMenuItem(
                       child: Text('1 Hab'),
                       value: '1',
@@ -134,15 +155,23 @@ class _PropEditDialogState extends State<PropEditDialog> {
                     ),
                     DropdownMenuItem(
                       child: Text('5+ Habs'),
-                      value: '5',
+                      value: '5+',
                     ),
                   ],
-                  onChanged: (value) {},
                 ),
                 DropdownButton(
-                  // isExpanded: true,
-                  value: '1',
+                  value: widget.propiedad?.estacionamientos ??
+                      propiedadesProvider.prop.estacionamientos,
+                  onChanged: (value) => setState(() {
+                    propiedadesProvider.prop.estacionamientos =
+                        value.toString();
+                    this.estacionamientos = value.toString();
+                  }),
                   items: [
+                    DropdownMenuItem(
+                      child: Text('Estac.'),
+                      value: '',
+                    ),
                     DropdownMenuItem(
                       child: Text('1 Estac.'),
                       value: '1',
@@ -161,10 +190,9 @@ class _PropEditDialogState extends State<PropEditDialog> {
                     ),
                     DropdownMenuItem(
                       child: Text('5+ Estac.'),
-                      value: '5',
+                      value: '5+',
                     ),
                   ],
-                  onChanged: (value) {},
                 ),
               ],
             ),
@@ -177,53 +205,65 @@ class _PropEditDialogState extends State<PropEditDialog> {
                 Container(
                   width: 80,
                   child: TextFormField(
-                    decoration: customInputDecoration(label: 'Mts2'),
+                    initialValue:
+                        widget.propiedad?.mts2 ?? propiedadesProvider.prop.mts2,
+                    onChanged: (value) => setState(() {
+                      propiedadesProvider.prop.mts2 = value.toString();
+                      this.mts2 = value.toString();
+                    }),
+                    decoration: InputDecoration(label: Text('Mts2')),
                   ),
                 ),
                 DropdownButton(
-                  // isExpanded: true,
-                  value: '1',
+                  value: widget.propiedad?.sevendeoalquila ??
+                      propiedadesProvider.prop.sevendeoalquila,
+                  onChanged: (value) => setState(() {
+                    propiedadesProvider.prop.sevendeoalquila = value.toString();
+                    this.sevendeoalquila = value.toString();
+                  }),
                   items: [
                     DropdownMenuItem(
                       child: Text('Venta'),
-                      value: '1',
+                      value: 'Venta',
                     ),
                     DropdownMenuItem(
                       child: Text('Alquiler'),
-                      value: '2',
+                      value: 'Alquiler',
                     ),
                   ],
-                  onChanged: (value) {},
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 DropdownButton(
-                  // isExpanded: true,
-                  value: '1',
+                  value: widget.propiedad?.tipopropiedad ??
+                      propiedadesProvider.prop.tipopropiedad,
+                  onChanged: (value) => setState(() {
+                    propiedadesProvider.prop.tipopropiedad = value.toString();
+                    this.tipopropiedad = value.toString();
+                  }),
                   items: [
                     DropdownMenuItem(
                       child: Text('Casa'),
-                      value: '1',
+                      value: 'Casa',
                     ),
                     DropdownMenuItem(
                       child: Text('Apartamento'),
-                      value: '2',
+                      value: 'Apartamento',
                     ),
                     DropdownMenuItem(
                       child: Text('Oficina'),
-                      value: '3',
+                      value: 'Oficina',
                     ),
                     DropdownMenuItem(
                       child: Text('Local'),
-                      value: '4',
+                      value: 'Local',
                     ),
                     DropdownMenuItem(
                       child: Text('Lote'),
-                      value: '5',
+                      value: 'Lote',
                     ),
                   ],
-                  onChanged: (value) {},
                 ),
               ],
             ),
@@ -235,26 +275,35 @@ class _PropEditDialogState extends State<PropEditDialog> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               DropdownButton(
-                // isExpanded: true,
-                value: proyectos[0].uid,
-                onChanged: (value) => setState(() {}),
-                selectedItemBuilder: (context) {
-                  return proyectos.map((proyecto) {
-                    return Text(proyecto.nombre);
-                  }).toList();
-                },
-                items: proyectos.map<DropdownMenuItem<String>>((proyecto) {
-                  return DropdownMenuItem<String>(
-                    value: proyecto.uid,
-                    child: Text(proyecto.nombre),
-                  );
-                }).toList(),
-              ),
+                  value: widget.propiedad?.proyecto.uid ??
+                      propiedadesProvider.idProyPropNew,
+                  onChanged: (value) => setState(() {
+                        propiedadesProvider.idProyPropNew = value.toString();
+                      }),
+                  selectedItemBuilder: (context) {
+                    return proyectos.map((proyecto) {
+                      return Text(proyecto.nombre);
+                    }).toList();
+                  },
+                  items: [
+                    ...proyectos.map<DropdownMenuItem<String>>((proyecto) {
+                      return DropdownMenuItem<String>(
+                        value: proyecto.uid,
+                        child: Text(proyecto.nombre),
+                      );
+                    }).toList(),
+                  ]),
               Container(
                 width: 80,
                 child: TextFormField(
+                  initialValue: widget.propiedad?.precio.toString() ??
+                      propiedadesProvider.prop.precio.toString(),
+                  onChanged: (value) => setState(() {
+                    propiedadesProvider.prop.precio = int.parse(value);
+                    this.precio = int.parse(value);
+                  }),
                   maxLines: 1,
-                  decoration: customInputDecoration(label: 'Precio'),
+                  decoration: InputDecoration(label: Text('Precio')),
                 ),
               ),
             ],
@@ -264,7 +313,7 @@ class _PropEditDialogState extends State<PropEditDialog> {
     );
   }
 
-  InputDecoration customInputDecoration({required String label}) {
-    return InputDecoration(label: Text(label));
+  InputDecoration customInputDecoration() {
+    return InputDecoration();
   }
 }

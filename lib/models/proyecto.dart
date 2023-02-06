@@ -1,66 +1,69 @@
 import 'dart:convert';
 
 class Proyecto {
-    Proyecto({
-        required this.nombre,
-        required this.direccion,
-        required this.amenidades,
-        required this.descripcion,
-        required this.ciudadPais,
-        required this.usuario,
-        required this.img,
-        required this.brochure,
-        required this.video,
-        required this.galeria,
-        required this.lat,
-        required this.lon,
-        required this.piscina,
-        required this.estac,
-        required this.roomParty,
-        required this.gym,
-        required this.roomPlay,
-        required this.parque,
-        required this.tenis,
-        required this.squash,
-        required this.raquetball,
-        required this.futbol,
-        required this.uid, required bool estado,
-        
-    });
+  Proyecto({
+    required this.nombre,
+    required this.direccion,
+    required this.amenidades,
+    required this.descripcion,
+    required this.detalles,
+    required this.ciudadPais,
+    required this.usuario,
+    required this.img,
+    required this.brochure,
+    required this.video,
+    required this.galeria,
+    required this.lat,
+    required this.lon,
+    required this.piscina,
+    required this.estac,
+    required this.roomParty,
+    required this.gym,
+    required this.roomPlay,
+    required this.parque,
+    required this.tenis,
+    required this.squash,
+    required this.raquetball,
+    required this.futbol,
+    required this.uid,
+    required bool estado,
+  });
 
-    String nombre;
-    String direccion;
-    String ciudadPais;
-    String descripcion;
-    String amenidades;
-    String usuario;
-    String img;
-    String brochure;
-    String video;
-    List<dynamic> galeria;
-    String lat;
-    String lon;
-    bool piscina;
-    bool estac;
-    bool roomParty;
-    bool gym;
-    bool roomPlay;
-    bool parque;
-    bool tenis;
-    bool squash;
-    bool raquetball;
-    bool futbol;
-    String uid;
+  String nombre;
+  String direccion;
+  String ciudadPais;
+  String descripcion;
+  String detalles;
+  String amenidades;
+  String usuario;
+  String img;
+  String brochure;
+  String video;
+  List<dynamic> galeria;
+  String lat;
+  String lon;
+  bool piscina;
+  bool estac;
+  bool roomParty;
+  bool gym;
+  bool roomPlay;
+  bool parque;
+  bool tenis;
+  bool squash;
+  bool raquetball;
+  bool futbol;
+  String uid;
 
-    factory Proyecto.fromJson(String str) => Proyecto.fromMap(json.decode(str));
+  factory Proyecto.fromJson(String str) => Proyecto.fromMap(json.decode(str));
 
-    String toJson() => json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-    factory Proyecto.fromMap(Map<String, dynamic> json) => Proyecto(
+  factory Proyecto.fromMap(Map<String, dynamic> json) => Proyecto(
         nombre: json["nombre"] ?? 'nombre' ?? '-0',
-        direccion: json["direccion"] ?? 'dir',
+        direccion: json["direccion"] ?? 'Direccion del Proyecto',
         ciudadPais: json["ciudadPais"] ?? 'ciudad',
-        descripcion: json["descripcion"] ?? 'Des',
+        descripcion: json["descripcion"] ?? 'Descripción del proyecto',
+        detalles: json["descripcion"] ?? 'Detalles del proyecto',
         amenidades: json["amenidades"] ?? 'Amenidades',
         usuario: json["usuario"] ?? 'usuario',
         img: json["img"] ?? '',
@@ -79,13 +82,15 @@ class Proyecto {
         squash: json["squash"] ?? false,
         raquetball: json["raquetball"] ?? false,
         futbol: json["futbol"] ?? false,
-        uid: json["uid"] ?? '-0', estado: false,
-    );
+        uid: json["uid"] ?? '-0',
+        estado: false,
+      );
 
-    Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() => {
         "nombre": nombre,
         "direccion": direccion,
         "descripcion": descripcion,
+        "detalles": detalles,
         "amenidades": amenidades,
         "ciudad": ciudadPais,
         "usuario": usuario,
@@ -106,5 +111,5 @@ class Proyecto {
         "squash": squash,
         "raquetball": raquetball,
         "futbol": futbol,
-    };
+      };
 }

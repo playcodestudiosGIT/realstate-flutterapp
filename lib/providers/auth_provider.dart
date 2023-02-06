@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:somosproperties/api/somosp_api.dart';
 import 'package:somosproperties/models/http/auth_response.dart';
 import 'package:somosproperties/models/usuario.dart';
@@ -102,9 +104,13 @@ class AuthProvider extends ChangeNotifier {
   Future updateUser() async {
     final data = {'nombre': user!.nombre};
     try {
-      // final resp = await SomospApi.put('/usuarios/${user!.uid}', data);
+      final resp = await SomospApi.put('/usuarios/${user!.uid}', data);
+      final authResponse = Usuario.fromMap(resp["usuario"]);
+      setUsuario(authResponse);
+      return true;
     } catch (e) {
       print('Error en $e');
     }
+    return false;
   }
 }

@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:somosproperties/api/somosp_api.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/datatables/prop_datasource.dart';
+import 'package:somosproperties/models/http/propiedad_response.dart';
 import 'package:somosproperties/models/propiedad.dart';
+import 'package:somosproperties/models/proyecto.dart';
 
 import 'package:somosproperties/providers/propiedades_provides.dart';
 import 'package:somosproperties/providers/users_provider.dart';
+import 'package:somosproperties/services/notification_service.dart';
 
 import 'package:somosproperties/ui/labels/custom_labels.dart';
 import 'package:somosproperties/ui/modals/prop_dialog.dart';
@@ -26,7 +32,7 @@ class _PropsEditViewState extends State<PropsEditView> {
 
   @override
   Widget build(BuildContext context) {
-    // final usersProvider = Provider.of<UsersProvider>(context);
+    final propiedadesProvider = Provider.of<PropiedadesProvider>(context);
     final List<Propiedad> propiedades =
         Provider.of<PropiedadesProvider>(context).listpropiedades;
     return Container(
@@ -57,7 +63,7 @@ class _PropsEditViewState extends State<PropsEditView> {
               DataColumn(label: Text('Galeria')),
               DataColumn(label: Text('Acciones')),
             ],
-            source: PropsDTS(propiedades, context),
+            source: PropsDTS(context),
             header: Text(
               'Lista de Propiedades',
               style: CustomLabels.h2ColorPrimary,
@@ -71,9 +77,17 @@ class _PropsEditViewState extends State<PropsEditView> {
             },
             actions: [
               ElevatedButton(
-                child: Icon(
-                  Icons.add_home_outlined,
-                  color: Colors.white,
+                child: Row(
+                  children: [
+                    Text('Agregar Propiedad'),
+                    SizedBox(
+                      width: kDefaultPadding / 2,
+                    ),
+                    Icon(
+                      Icons.add_home_outlined,
+                      color: Colors.white,
+                    ),
+                  ],
                 ),
                 style: ButtonStyle(
                     backgroundColor:
@@ -81,19 +95,55 @@ class _PropsEditViewState extends State<PropsEditView> {
                 onPressed: () {
                   final dialog = AlertDialog(
                     title: Text('Agregar propiedad'),
-                    content: Container(child: PropEditDialog()),
+                    content: Container(
+                        child: PropEditDialog(
+                      propiedad: null, //
+                    )),
                     actions: [
                       TextButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            final data = {
+                              "nombreProp": propiedadesProvider.prop.nombreProp,
+                              "direccion": propiedadesProvider.prop.direccion,
+                              "detalles": propiedadesProvider.prop.detalles,
+                              "sevendeoalquila":
+                                  propiedadesProvider.prop.sevendeoalquila,
+                              "tipopropiedad":
+                                  propiedadesProvider.prop.tipopropiedad,
+                              "mts2": propiedadesProvider.prop.mts2,
+                              "proyecto": propiedadesProvider.idProyPropNew,
+                              "descripcion":
+                                  propiedadesProvider.prop.descripcion,
+                              "habitaciones":
+                                  propiedadesProvider.prop.habitaciones,
+                              "precio": propiedadesProvider.prop.precio,
+                              "banos": propiedadesProvider.prop.banos,
+                              "estacionamientos":
+                                  propiedadesProvider.prop.estacionamientos
+                            };
+                            // Petición HTTP
+                            try {
+                              final resp =
+                                  await SomospApi.post('/propiedades', data);
+
+                              propiedadesProvider.getPropiedades();
+                              propiedadesProvider.notify();
+                              setState(() {});
+                              NotificationService.showSnackbarError(
+                                  msg: 'Propiedad Agregada',
+                                  color: Colors.green);
+                            } catch (e) {
+                              NotificationService.showSnackbarError(
+                                  msg: 'Error Agregando Propiedad',
+                                  color: Colors.red);
+                              print('error agregando prop --- $e');
+                            }
+
                             Navigator.of(context).pop();
                           },
-                          child: Text('Crear')),
+                          child: Text('Agregar')),
                       TextButton(
                           onPressed: () async {
-                            //BORRAR USUARIO
-                            // await Provider.of<UsersProvider>(context,
-                            //         listen: false)
-                            //     .deleteUser(user.uid.toString());
                             Navigator.of(context).pop();
                           },
                           child: Text('Descartar'))

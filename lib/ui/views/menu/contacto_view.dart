@@ -4,10 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:seo_renderer/seo_renderer.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/contacto_form_provider.dart';
-import 'package:somosproperties/providers/propiedades_provides.dart';
-import 'package:somosproperties/services/notification_service.dart';
-import 'package:somosproperties/ui/buttons/custom_outlined_button.dart';
-import 'package:somosproperties/ui/cards/propiedad_card.dart';
 import 'package:somosproperties/ui/inputs/custom_inputs.dart';
 
 import 'package:somosproperties/ui/labels/custom_labels.dart';
@@ -18,7 +14,7 @@ class ContactoView extends StatelessWidget {
   Widget build(BuildContext context) {
     final contactoFormProvider = Provider.of<ContactoFormProvider>(context);
     final isSending = Provider.of<ContactoFormProvider>(context).isSending;
-    final listProp = Provider.of<PropiedadesProvider>(context).listpropiedades;
+
     return Container(
       child: ListView(
         physics: ClampingScrollPhysics(),
@@ -181,27 +177,6 @@ class ContactoView extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          SizedBox(height: kDefaultPadding),
-          WhiteCard(
-            isDrag: true,
-            title: 'PROPIEDADES',
-            child: Builder(builder: (context) {
-              final destrProp = listProp.map(
-                (e) {
-                  return PropiedadCard(propiedad: e);
-                },
-              );
-              return Container(
-                height: 515,
-                child: (destrProp.length == 0)
-                    ? CircularProgressIndicator()
-                    : ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [...destrProp],
-                      ),
-              );
-            }),
           ),
         ],
       ),

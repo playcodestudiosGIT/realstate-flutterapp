@@ -30,7 +30,7 @@ class ProyectoCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(0)),
           ),
-          width: 290,
+          width: 300,
           child: Stack(
             children: [
               Column(
@@ -65,21 +65,16 @@ class ProyectoCard extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: kDefaultPadding),
                       child: Column(
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: 260,
-                                child: TextRenderer(
-                                  child: Text(
-                                    proyecto.nombre,
-                                    style: CustomLabels.h1ColorPrimary
-                                        .copyWith(fontSize: 18),
-                                    maxLines: 2,
-                                  ),
-                                ),
+                          Container(
+                            width: 300,
+                            child: TextRenderer(
+                              child: Text(
+                                proyecto.nombre,
+                                style: CustomLabels.h1ColorPrimary
+                                    .copyWith(fontSize: 18),
+                                maxLines: 2,
                               ),
-                            ],
+                            ),
                           ),
                           SizedBox(height: kDefaultPadding / 2),
                           Row(
