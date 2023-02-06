@@ -7,9 +7,8 @@ class SomospApi {
 
   static void configureDio() {
     //Base URL
-    _dio.options.baseUrl =
-        // 'https://www.somosproperties.com/api';
-        'http://localhost:8080/api';
+    _dio.options.baseUrl = 'https://www.somosproperties.com/api';
+    // 'http://localhost:8080/api';
 
     // Conf Header
     _dio.options.headers = {

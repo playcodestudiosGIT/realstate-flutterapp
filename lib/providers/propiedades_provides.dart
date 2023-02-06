@@ -259,11 +259,9 @@ class PropiedadesProvider extends ChangeNotifier {
       "altura": prop.altura,
       "estacionamientos": prop.estacionamientos,
     };
-    print(data);
     // Petición HTTP
     await SomospApi.put('/propiedades', data).then((json) {
       final resp = Propiedad.fromMap(json);
-      print(resp);
     }).catchError((e) {
       print('ERROR USER CREATE $e');
     });

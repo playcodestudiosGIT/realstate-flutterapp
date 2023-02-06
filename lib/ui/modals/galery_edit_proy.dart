@@ -116,7 +116,6 @@ class _GaleryEditProyState extends State<GaleryEditProy> {
             onPressed: () async {
               final resp = await proyectosProvider.updateGaleria(
                   widget.proyecto.uid, widget.proyecto.galeria);
-              print(resp);
               Navigator.of(context).pop();
             },
             child: Text('Guardar')),
