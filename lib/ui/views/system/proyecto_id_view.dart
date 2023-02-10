@@ -345,6 +345,9 @@ class _ProyectoIDViewState extends State<ProyectoIDView> {
                         ),
                       ],
                     )),
+                SizedBox(
+                  height: 100,
+                )
               ],
             ),
           ),

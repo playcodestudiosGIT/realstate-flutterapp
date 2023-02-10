@@ -77,7 +77,7 @@ class _BuscarViewState extends State<BuscarView> {
                       : [...destrct]),
             ),
             SizedBox(
-              height: 75,
+              height: (size.width < 412) ? 130 : 75,
             )
           ],
         ),

@@ -21,6 +21,7 @@ class _ProyectosViewState extends State<ProyectosView> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final proyectos = Provider.of<ProyectosProvider>(context).proyectos;
     final lista = proyectos.map(
       (e) {
@@ -49,7 +50,7 @@ class _ProyectosViewState extends State<ProyectosView> {
                   Wrap(alignment: WrapAlignment.center, children: [...lista]),
             ),
             SizedBox(
-              height: 75,
+              height: (size.width < 412) ? 130 : 75,
             )
           ],
         ),

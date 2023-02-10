@@ -206,7 +206,7 @@ class EmpleoView extends StatelessWidget {
                                                 width: kDefaultPadding / 2,
                                               ),
                                               Container(
-                                                width: 240,
+                                                width: 191,
                                                 child: Text(
                                                   (empleoFormProvider
                                                               .fileName !=

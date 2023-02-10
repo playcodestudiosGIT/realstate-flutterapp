@@ -18,15 +18,15 @@ class LinksBar extends StatelessWidget {
           alignment: WrapAlignment.center,
           children: [
             Container(
-              height: 60,
-              width: 215,
+              height: 40,
+              width: 200,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Image(
                     image: NetworkImage(
                         'https://res.cloudinary.com/dnejayiiq/image/upload/v1672611233/somospisoblanco_rl0zca.png'),
-                    width: 40,
+                    width: (size.width < 400) ? 30 : 40,
                   ),
                   LinkText(
                       text: 'Somos Properties',
