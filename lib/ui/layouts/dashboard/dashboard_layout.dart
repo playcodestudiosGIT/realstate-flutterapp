@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/sidemenu_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:somosproperties/ui/shared/links_bar.dart';
 
 import 'package:somosproperties/ui/shared/navbar.dart';
 import 'package:somosproperties/ui/shared/sidebar.dart';
@@ -70,6 +71,7 @@ class _DashboardLayoutState extends State<DashboardLayout>
                       // Navbar
 
                       Navbar(),
+                      Positioned(bottom: 0, child: LinksBar())
                     ],
                   ),
                 )
@@ -103,9 +105,9 @@ class _DashboardLayoutState extends State<DashboardLayout>
                           Transform.translate(
                             offset: Offset(SideMenuProvider.movement.value, 0),
                             child: Sidebar(),
-                          )
+                          ),
                         ],
-                      ))
+                      )),
           ],
         ));
   }

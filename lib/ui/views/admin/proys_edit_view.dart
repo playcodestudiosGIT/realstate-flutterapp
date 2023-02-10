@@ -57,7 +57,7 @@ class _ProysEditViewState extends State<ProysEditView> {
               DataColumn(label: Text('Detalles')),
               DataColumn(label: Text('Amenidades')),
               DataColumn(label: Text('Video')),
-              DataColumn(label: Text('Broshure')),
+              DataColumn(label: Text('Brochure')),
               DataColumn(label: Text('Galeria')),
               DataColumn(label: Text('Acciones')),
             ],

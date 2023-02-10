@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:seo_renderer/seo_renderer.dart';
 
 class LinkText extends StatefulWidget {
   final Color color;
@@ -29,15 +28,13 @@ class _LinkTextState extends State<LinkText> {
         onExit: (_) => setState(() => isHover = false),
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          child: TextRenderer(
-            child: Text(
-              widget.text,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: widget.color,
-                  decoration:
-                      isHover ? TextDecoration.underline : TextDecoration.none),
-            ),
+          child: Text(
+            widget.text,
+            style: TextStyle(
+                fontSize: 16,
+                color: widget.color,
+                decoration:
+                    isHover ? TextDecoration.underline : TextDecoration.none),
           ),
         ),
       ),

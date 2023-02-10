@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/empleo_form_provider.dart';
 import 'package:somosproperties/services/notification_service.dart';
@@ -55,13 +55,10 @@ class EmpleoView extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextRenderer(
-                        style: TextRendererStyle.header1,
-                        child: Text(
-                          'EMPLEO',
-                          style: CustomLabels.h1
-                              .copyWith(fontWeight: FontWeight.bold),
-                        ),
+                      Text(
+                        'EMPLEO',
+                        style: CustomLabels.h1
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: kDefaultPadding,

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/constants.dart';
 
-
 class WhiteCard extends StatelessWidget {
-
   final String? title;
   final Widget child;
   final double? width;
@@ -16,9 +14,8 @@ class WhiteCard extends StatelessWidget {
     required this.child,
     required this.isDrag,
     this.title,
-    this.width, 
+    this.width,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -30,31 +27,25 @@ class WhiteCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
-          if( title != null ) 
-          ...[
+          if (title != null) ...[
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextRenderer(
-                  style: TextRendererStyle.header1,
-                  text: '$title',
-                  child: Text(
-                    title!,
-                    style: GoogleFonts.roboto(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
+                Text(
+                  title!,
+                  style: GoogleFonts.roboto(
+                      fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 if (isDrag)
-                Icon(Icons.swipe_left_alt_sharp, color: kPrimaryColor, size: 30,)
+                  Icon(
+                    Icons.swipe_left_alt_sharp,
+                    color: kPrimaryColor,
+                    size: 30,
+                  )
               ],
             ),
-
             Divider()
           ],
-
           child
         ],
       ),
@@ -62,13 +53,9 @@ class WhiteCard extends StatelessWidget {
   }
 
   BoxDecoration buildBoxDecoration() => BoxDecoration(
-    color: Colors.white,
-    borderRadius: BorderRadius.circular(5),
-    boxShadow: [
-      BoxShadow(
-        color: Colors.black.withOpacity(0.05),
-        blurRadius: 5
-      )
-    ]
-  );
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: [
+            BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 5)
+          ]);
 }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/api/somosp_api.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/models/usuario.dart';
@@ -29,9 +29,7 @@ class ConfiguracionView extends StatelessWidget {
           ),
           Row(
             children: [
-              TextRenderer(
-                  style: TextRendererStyle.header1,
-                  child: Text('Configuración', style: CustomLabels.h1)),
+              Text('Configuración', style: CustomLabels.h1),
               Text(' (En construcción)')
             ],
           ),

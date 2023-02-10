@@ -1,5 +1,3 @@
-import 'package:flutter/rendering.dart';
-import 'package:seo_renderer/renderers/image_renderer/image_renderer_vm.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/router/router.dart';
 import 'package:somosproperties/services/navigation_service.dart';
@@ -13,23 +11,25 @@ class LinksBar extends StatelessWidget {
 
     return Container(
         color: kPrimaryColor,
+        width: size.width,
         height: (size.width > 1323) ? size.height * 0.07 : null,
         child: Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           alignment: WrapAlignment.center,
           children: [
             Container(
+              height: 60,
               width: 215,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ImageRenderer(
-                      alt: 'Logo Somosproperties',
-                      child: Image(
-                        image: NetworkImage(
-                            'https://res.cloudinary.com/dnejayiiq/image/upload/v1672611233/somospisoblanco_rl0zca.png'),
-                        width: 20,
-                      )),
+                  Image(
+                    image: NetworkImage(
+                        'https://res.cloudinary.com/dnejayiiq/image/upload/v1672611233/somospisoblanco_rl0zca.png'),
+                    width: 40,
+                  ),
                   LinkText(
-                      text: 'Somosproperties S.A',
+                      text: 'Somos Properties',
                       color: Colors.white,
                       onPressed: () => NavigationService.navigateTo(
                           Flurorouter.nosotrosRoute)),

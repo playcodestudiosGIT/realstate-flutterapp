@@ -42,22 +42,24 @@ class _NavbarState extends State<Navbar> {
           SizedBox(width: 5),
           if (Provider.of<SideMenuProvider>(context).currentPage !=
               Flurorouter.buscarRoute)
+            if (Provider.of<SideMenuProvider>(context).currentPage !=
+                Flurorouter.rootRoute)
+              IconButton(
+                  onPressed: () {
+                    NavigationService.navigateTo('${Flurorouter.rootRoute}');
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
+          if (Provider.of<SideMenuProvider>(context).currentPage !=
+              Flurorouter.buscarRoute)
             IconButton(
                 onPressed: () {
                   NavigationService.navigateTo('${Flurorouter.buscarRoute}/');
                 },
                 icon: Icon(
                   Icons.search_outlined,
-                  color: Colors.white,
-                )),
-          if (Provider.of<SideMenuProvider>(context).currentPage ==
-              Flurorouter.buscarRoute)
-            IconButton(
-                onPressed: () {
-                  NavigationService.navigateTo('${Flurorouter.rootRoute}');
-                },
-                icon: Icon(
-                  Icons.arrow_back,
                   color: Colors.white,
                 )),
           Spacer(),

@@ -1,5 +1,3 @@
-import 'package:seo_renderer/renderers/text_renderer/text_renderer_style.dart';
-import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/busqueda_provider.dart';
 import 'package:somosproperties/providers/propiedades_provides.dart';
@@ -37,9 +35,7 @@ class PropiedadesSearchDelegate extends SearchDelegate {
     }).toList();
 
     if (query.trim().length == 0) {
-      return TextRenderer(
-          style: TextRendererStyle.header1,
-          child: Text('Ingrese una palabra para buscar'));
+      return Text('Ingrese una palabra para buscar');
     }
 
     return Container(

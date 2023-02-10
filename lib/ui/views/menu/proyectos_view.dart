@@ -1,4 +1,3 @@
-import 'package:seo_renderer/seo_renderer.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/proyectos_provider.dart';
 import 'package:somosproperties/ui/cards/proyecto_card.dart';
@@ -28,8 +27,8 @@ class _ProyectosViewState extends State<ProyectosView> {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: ProyectoCard(
-              proyecto: e,
-            ),
+            proyecto: e,
+          ),
         );
       },
     );
@@ -39,17 +38,18 @@ class _ProyectosViewState extends State<ProyectosView> {
         child: ListView(
           physics: ClampingScrollPhysics(),
           children: [
-            
             SizedBox(height: kDefaultPadding),
-            TextRenderer(style: TextRendererStyle.header2, child: Text('Proyectos', style: CustomLabels.h1,)),
+            Text(
+              'Proyectos',
+              style: CustomLabels.h1,
+            ),
             SizedBox(height: kDefaultPadding),
             Container(
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                children: [
-                ...lista
-
-              ]),
+              child:
+                  Wrap(alignment: WrapAlignment.center, children: [...lista]),
+            ),
+            SizedBox(
+              height: 75,
             )
           ],
         ),
@@ -57,4 +57,3 @@ class _ProyectosViewState extends State<ProyectosView> {
     );
   }
 }
-

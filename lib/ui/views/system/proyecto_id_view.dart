@@ -1,5 +1,5 @@
 import 'package:somosproperties/constants.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/models/propiedad.dart';
 import 'package:somosproperties/models/proyecto.dart';
 import 'package:somosproperties/providers/propiedades_provides.dart';
@@ -55,7 +55,7 @@ class _ProyectoIDViewState extends State<ProyectoIDView> {
               physics: ClampingScrollPhysics(),
               children: [
                 WhiteCard(
-                    isDrag: true,
+                    isDrag: false,
                     title: 'GALERIA',
                     child: FotoBanerPropiedad(
                       fotoBaner: proyecto.img,
@@ -314,9 +314,7 @@ class _ProyectoIDViewState extends State<ProyectoIDView> {
                                 backgroundColor:
                                     MaterialStateProperty.all(kPrimaryColor)),
                             onPressed: _broshure,
-                            child: TextRenderer(
-                                style: TextRendererStyle.paragraph,
-                                child: Text('Download Brochure'))),
+                            child: Text('Download Brochure')),
                       ]),
                     )),
                 WhiteCard(
@@ -360,7 +358,7 @@ class _ProyectoIDViewState extends State<ProyectoIDView> {
                     )),
                 SizedBox(height: kDefaultPadding / 3),
                 WhiteCard(
-                    isDrag: true,
+                    isDrag: false,
                     title: 'PROPIEDADES DEL PROYECTO',
                     child: Container(
                       width: 250,
@@ -397,12 +395,22 @@ class InfoBar extends StatelessWidget {
       SizedBox(height: kDefaultPadding / 2),
       Row(
         children: [
-          CustomOutlinedButtonMini(
-            color: kSecondaryColor,
-            isFilled: true,
+          ElevatedButton(
             onPressed: _launchUrl,
-            text: 'Agente especializado',
-            icon: Icons.whatsapp,
+            child: Row(
+              children: [
+                Icon(Icons.whatsapp),
+                SizedBox(
+                  width: kDefaultPadding / 2,
+                ),
+                Text('Agente especializado'),
+              ],
+            ),
+            style: ButtonStyle(
+              side:
+                  MaterialStateProperty.all(BorderSide(color: kSecondaryColor)),
+              backgroundColor: MaterialStateProperty.all(kSecondaryColor),
+            ),
           )
         ],
       )
@@ -462,9 +470,7 @@ class PropiedadNombre extends StatelessWidget {
                     SizedBox(
                       width: 6,
                     ),
-                    TextRenderer(
-                        style: TextRendererStyle.header2,
-                        child: Text('Brochure')),
+                    Text('Brochure'),
                   ],
                 ),
               )),
@@ -488,9 +494,7 @@ class PropiedadNombre extends StatelessWidget {
                       SizedBox(
                         width: 6,
                       ),
-                      TextRenderer(
-                          style: TextRendererStyle.header2,
-                          child: Text('Chat')),
+                      Text('Chat'),
                     ],
                   ),
                 )),
@@ -508,18 +512,12 @@ class PropiedadNombre extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      TextRenderer(
-                        style: TextRendererStyle.header1,
-                        child: Text(
-                          proy.nombre,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline4!
-                              .copyWith(
-                                  color: kPrimaryColor,
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: (size.width < 500) ? 20 : 32),
-                        ),
+                      Text(
+                        proy.nombre,
+                        style: Theme.of(context).textTheme.headline4!.copyWith(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.w900,
+                            fontSize: (size.width < 500) ? 20 : 32),
                       ),
                     ],
                   ),
@@ -536,19 +534,12 @@ class PropiedadNombre extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      TextRenderer(
-                        style: TextRendererStyle.paragraph,
-                        child: Text(
-                          proy.direccion,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .copyWith(
-                                  color: Colors.black
-                                      .withOpacity(kBodyTextOpacity),
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 14),
-                        ),
+                      Text(
+                        proy.direccion,
+                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                            color: Colors.black.withOpacity(kBodyTextOpacity),
+                            fontWeight: FontWeight.w900,
+                            fontSize: 14),
                       ),
                     ],
                   ),

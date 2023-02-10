@@ -47,7 +47,7 @@ class _MainViewState extends State<MainView> {
       physics: ClampingScrollPhysics(),
       children: [
         WhiteCard(
-          isDrag: true,
+          isDrag: false,
           child: Container(
             width: double.infinity,
             height: (size.width > 600 ? 400 : 300),
@@ -78,7 +78,7 @@ class _MainViewState extends State<MainView> {
         ),
         SizedBox(height: kDefaultPadding),
         WhiteCard(
-          isDrag: true,
+          isDrag: false,
           title: 'PROYECTOS',
           child: Column(
             children: [
@@ -127,7 +127,7 @@ class _MainViewState extends State<MainView> {
         ),
         SizedBox(height: kDefaultPadding),
         WhiteCard(
-          isDrag: true,
+          isDrag: false,
           child: Padding(
             padding: const EdgeInsets.only(left: kDefaultPadding / 2),
             child: CategoriasSlider(
@@ -137,7 +137,7 @@ class _MainViewState extends State<MainView> {
         ),
         SizedBox(height: kDefaultPadding),
         WhiteCard(
-          isDrag: true,
+          isDrag: false,
           title: 'PROPIEDADES DESTACADAS',
           child: Builder(builder: (context) {
             final destrProp = listProp.map(
@@ -157,7 +157,7 @@ class _MainViewState extends State<MainView> {
           }),
         ),
         WhiteCard(
-          isDrag: true,
+          isDrag: false,
           title: 'PROPIEDADES EN VENTA',
           child: Builder(builder: (context) {
             final destrProp = listventa.map(
@@ -177,7 +177,7 @@ class _MainViewState extends State<MainView> {
           }),
         ),
         WhiteCard(
-          isDrag: true,
+          isDrag: false,
           title: 'PROPIEDADES EN ALQUILER',
           child: Builder(builder: (context) {
             final destrProp = listAlq.map(
@@ -196,8 +196,9 @@ class _MainViewState extends State<MainView> {
             );
           }),
         ),
-        SizedBox(height: kDefaultPadding * 3),
-        LinksBar()
+        SizedBox(
+          height: 75,
+        )
       ],
     );
   }

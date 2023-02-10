@@ -1,5 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/models/propiedad.dart';
 import 'package:somosproperties/services/navigation_service.dart';
 import 'package:somosproperties/ui/buttons/custom_outlined_button_mini.dart';
@@ -77,17 +77,14 @@ class _PropiedadCardState extends State<PropiedadCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextRenderer(
-                            style: TextRendererStyle.header1,
-                            child: Text(
-                              '${widget.propiedad.nombreProp}',
-                              style: GoogleFonts.roboto(
-                                  color: kPrimaryColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w800),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            ),
+                          Text(
+                            '${widget.propiedad.nombreProp}',
+                            style: GoogleFonts.roboto(
+                                color: kPrimaryColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
                           Row(
                             children: [
@@ -103,20 +100,17 @@ class _PropiedadCardState extends State<PropiedadCard> {
                           ),
                           Container(
                             constraints: BoxConstraints(maxWidth: 250),
-                            child: TextRenderer(
-                              style: TextRendererStyle.paragraph,
-                              child: Text(
-                                widget.propiedad.descripcion,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline6!
-                                    .copyWith(
-                                        color: Colors.black
-                                            .withOpacity(kBodyTextOpacity),
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 14),
-                                maxLines: 2,
-                              ),
+                            child: Text(
+                              widget.propiedad.descripcion,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(
+                                      color: Colors.black
+                                          .withOpacity(kBodyTextOpacity),
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 14),
+                              maxLines: 2,
                             ),
                           ),
                         ],
@@ -147,11 +141,8 @@ class _PropiedadCardState extends State<PropiedadCard> {
                           SizedBox(
                             width: kDefaultPadding / 2,
                           ),
-                          TextRenderer(
-                              style: TextRendererStyle.paragraph,
-                              child: Text('${widget.propiedad.mts2} m2',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.w800))),
+                          Text('${widget.propiedad.mts2} m2',
+                              style: TextStyle(fontWeight: FontWeight.w800)),
                         ],
                         if (widget.propiedad.habitaciones != '') ...[
                           SizedBox(
@@ -209,15 +200,12 @@ class _PropiedadCardState extends State<PropiedadCard> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextRenderer(
-                          style: TextRendererStyle.header2,
-                          child: Text(
-                            (widget.propiedad.sevendeoalquila == 'Alquiler')
-                                ? 'Alquiler'
-                                : 'Venta',
-                            style: GoogleFonts.roboto(
-                                fontSize: 12, color: kBodyTextColor),
-                          ),
+                        Text(
+                          (widget.propiedad.sevendeoalquila == 'Alquiler')
+                              ? 'Alquiler'
+                              : 'Venta',
+                          style: GoogleFonts.roboto(
+                              fontSize: 12, color: kBodyTextColor),
                         ),
                         Text(
                           NumberFormat.simpleCurrency(

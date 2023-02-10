@@ -1,5 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/models/proyecto.dart';
 import 'package:somosproperties/services/navigation_service.dart';
@@ -36,24 +36,20 @@ class ProyectoCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ImageRenderer(
-                    alt: 'Galeria de ${proyecto.nombre}',
-                    src: proyecto.galeria[0],
-                    child: Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(0),
-                            topRight: Radius.circular(0),
-                          ),
-                          image: DecorationImage(
-                            image: (proyecto.galeria.length == 0)
-                                ? NetworkImage(
-                                    'https://res.cloudinary.com/dnejayiiq/image/upload/v1672446892/logo_hnizxp.png')
-                                : NetworkImage(proyecto.galeria[0]),
-                            fit: BoxFit.cover,
-                          )),
-                    ),
+                  Container(
+                    height: 150,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(0),
+                          topRight: Radius.circular(0),
+                        ),
+                        image: DecorationImage(
+                          image: (proyecto.galeria.length == 0)
+                              ? NetworkImage(
+                                  'https://res.cloudinary.com/dnejayiiq/image/upload/v1672446892/logo_hnizxp.png')
+                              : NetworkImage(proyecto.galeria[0]),
+                          fit: BoxFit.cover,
+                        )),
                   ),
                   SizedBox(
                     height: kDefaultPadding,
@@ -67,13 +63,11 @@ class ProyectoCard extends StatelessWidget {
                         children: [
                           Container(
                             width: 300,
-                            child: TextRenderer(
-                              child: Text(
-                                proyecto.nombre,
-                                style: CustomLabels.h1ColorPrimary
-                                    .copyWith(fontSize: 18),
-                                maxLines: 2,
-                              ),
+                            child: Text(
+                              proyecto.nombre,
+                              style: CustomLabels.h1ColorPrimary
+                                  .copyWith(fontSize: 18),
+                              maxLines: 2,
                             ),
                           ),
                           SizedBox(height: kDefaultPadding / 2),
@@ -167,12 +161,10 @@ class ProyectoCard extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: kDefaultPadding),
-                          TextRenderer(
-                            child: Text(
-                              proyecto.descripcion,
-                              maxLines: 3,
-                              style: CustomLabels.h3ColorBlack87,
-                            ),
+                          Text(
+                            proyecto.descripcion,
+                            maxLines: 3,
+                            style: CustomLabels.h3ColorBlack87,
                           ),
                           SizedBox(
                             height: kDefaultPadding,

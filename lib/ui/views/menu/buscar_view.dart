@@ -76,6 +76,9 @@ class _BuscarViewState extends State<BuscarView> {
                         ]
                       : [...destrct]),
             ),
+            SizedBox(
+              height: 75,
+            )
           ],
         ),
         Positioned(child: SearchFilterBar()),
@@ -125,7 +128,9 @@ class _SearchFilterBarState extends State<SearchFilterBar> {
                     ),
                     width: 250,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
+                      padding: (size.width < 400)
+                          ? const EdgeInsets.only(bottom: 4)
+                          : const EdgeInsets.only(bottom: 8.0),
                       child: TextFormField(
                         initialValue: value,
                         style: TextStyle(color: Colors.white),

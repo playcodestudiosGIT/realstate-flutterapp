@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:seo_renderer/seo_renderer.dart';
+
 import 'package:somosproperties/constants.dart';
-import 'package:somosproperties/providers/propiedades_provides.dart';
-import 'package:somosproperties/ui/cards/propiedad_card.dart';
+import 'package:somosproperties/providers/proyectos_provider.dart';
+import 'package:somosproperties/services/navigation_service.dart';
+import 'package:somosproperties/ui/cards/proyecto_card.dart';
 import 'package:somosproperties/ui/cards/white_card.dart';
 
 import 'package:somosproperties/ui/labels/custom_labels.dart';
@@ -11,7 +12,15 @@ import 'package:somosproperties/ui/labels/custom_labels.dart';
 class NosotrosView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final listProp = Provider.of<PropiedadesProvider>(context).listpropiedades;
+    final proyectosProvider = Provider.of<ProyectosProvider>(context);
+
+    final destrProy = proyectosProvider.proyectos.map(
+      (e) => Padding(
+        padding: const EdgeInsets.only(
+            right: kDefaultPadding, left: kDefaultPadding),
+        child: ProyectoCard(proyecto: e),
+      ),
+    );
     return Container(
       width: double.infinity,
       child: Padding(
@@ -55,13 +64,10 @@ class NosotrosView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextRenderer(
-                          style: TextRendererStyle.header1,
-                          child: Text(
-                            'QUIENES SOMOS',
-                            style: CustomLabels.h1
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          'QUIENES SOMOS',
+                          style: CustomLabels.h1
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: kDefaultPadding,
@@ -85,23 +91,17 @@ class NosotrosView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextRenderer(
-                          style: TextRendererStyle.header1,
-                          child: Text(
-                            'FILOSOFÍA',
-                            style: CustomLabels.h1
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          'FILOSOFÍA',
+                          style: CustomLabels.h1
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: kDefaultPadding,
                         ),
-                        TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          child: Text(
-                            'Nos comprometemos con el cliente a mantener el alto estándar e innovación de propiedades, protegiendo nuestros valores:\n\nTransparencia: Fomentamos acciones organizacionales que promueven la comunicación clara, comprensible y precisa a nuestros clientes, protegiendo sus objetivos.\n\nInnovación: Promovemos la introducción de novedades en cada una de nuestras propiedades para alcanzar calidad en atención y satisfacción al cliente.\n\nTrabajo en Equipo: Multiplica nuestra productividad empresarial contribuyendo al desarrollo eficaz de las actividades dentro del equipo, compartiendo información y conocimientos para la mejora continua de nuestros procesos.\n\nPara así, superar las expectativas del cliente cada día; desarrollando estratégicamente en presente y en el largo plazo.',
-                            style: CustomLabels.h3ColorBlack87,
-                          ),
+                        Text(
+                          'Nos comprometemos con el cliente a mantener el alto estándar e innovación de propiedades, protegiendo nuestros valores:\n\nTransparencia: Fomentamos acciones organizacionales que promueven la comunicación clara, comprensible y precisa a nuestros clientes, protegiendo sus objetivos.\n\nInnovación: Promovemos la introducción de novedades en cada una de nuestras propiedades para alcanzar calidad en atención y satisfacción al cliente.\n\nTrabajo en Equipo: Multiplica nuestra productividad empresarial contribuyendo al desarrollo eficaz de las actividades dentro del equipo, compartiendo información y conocimientos para la mejora continua de nuestros procesos.\n\nPara así, superar las expectativas del cliente cada día; desarrollando estratégicamente en presente y en el largo plazo.',
+                          style: CustomLabels.h3ColorBlack87,
                         ),
                       ],
                     ),
@@ -118,23 +118,17 @@ class NosotrosView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextRenderer(
-                          style: TextRendererStyle.header1,
-                          child: Text(
-                            'VISIÓN',
-                            style: CustomLabels.h1
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          'VISIÓN',
+                          style: CustomLabels.h1
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: kDefaultPadding,
                         ),
-                        TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          child: Text(
-                            'Ser empresa líder en el desarrollo y venta de apartamentos lujosos a nivel latinoamericano mediante el establecimiento de alianzas comerciales estratégicas, basado en los 3 pilares comerciales: innovación, ubicación y acabados',
-                            style: CustomLabels.h3ColorBlack87,
-                          ),
+                        Text(
+                          'Ser empresa líder en el desarrollo y venta de apartamentos lujosos a nivel latinoamericano mediante el establecimiento de alianzas comerciales estratégicas, basado en los 3 pilares comerciales: innovación, ubicación y acabados',
+                          style: CustomLabels.h3ColorBlack87,
                         ),
                       ],
                     ),
@@ -151,23 +145,17 @@ class NosotrosView extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextRenderer(
-                          style: TextRendererStyle.header1,
-                          child: Text(
-                            'MISIÓN',
-                            style: CustomLabels.h1
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
+                        Text(
+                          'MISIÓN',
+                          style: CustomLabels.h1
+                              .copyWith(fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
                           height: kDefaultPadding,
                         ),
-                        TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          child: Text(
-                            'Somos una empresa dedicada a ofrecer soluciones inmobiliarias en la venta y alquiler de apartamentos lujosos, locales, terrenos, oficinas en Panamá buscando satisfacer a nuestros clientes y preservando el patrimonio con profesionalismo e integridad.',
-                            style: CustomLabels.h3ColorBlack87,
-                          ),
+                        Text(
+                          'Somos una empresa dedicada a ofrecer soluciones inmobiliarias en la venta y alquiler de apartamentos lujosos, locales, terrenos, oficinas en Panamá buscando satisfacer a nuestros clientes y preservando el patrimonio con profesionalismo e integridad.',
+                          style: CustomLabels.h3ColorBlack87,
                         ),
                       ],
                     ),
@@ -175,24 +163,55 @@ class NosotrosView extends StatelessWidget {
                 ),
                 SizedBox(height: kDefaultPadding),
                 WhiteCard(
-                  isDrag: true,
-                  title: 'PROPIEDADES',
-                  child: Builder(builder: (context) {
-                    final destrProp = listProp.map(
-                      (e) {
-                        return PropiedadCard(propiedad: e);
-                      },
-                    );
-                    return Container(
-                      height: 515,
-                      child: (destrProp.length == 0)
-                          ? CircularProgressIndicator()
-                          : ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [...destrProp],
+                  isDrag: false,
+                  title: 'PROYECTOS',
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 150,
+                        child: ListView.builder(
+                          itemCount: destrProy.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              NavigationService.navigateTo(
+                                  '/proyectos/${proyectosProvider.proyectos[index].uid}');
+                            },
+                            child: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: kDefaultPadding),
+                                child: Image(
+                                    fit: BoxFit.cover,
+                                    width: 150,
+                                    image: (proyectosProvider
+                                                .proyectos[index].img ==
+                                            '')
+                                        ? NetworkImage(
+                                            'https://res.cloudinary.com/dnejayiiq/image/upload/v1672446892/logo_hnizxp.png')
+                                        : NetworkImage(proyectosProvider
+                                            .proyectos[index].img)),
+                              ),
                             ),
-                    );
-                  }),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: kDefaultPadding,
+                      ),
+                      Padding(
+                          padding:
+                              const EdgeInsets.only(left: kDefaultPadding / 2),
+                          child: Container(
+                            height: 370,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [...destrProy],
+                            ),
+                          )),
+                    ],
+                  ),
                 ),
               ],
             ),

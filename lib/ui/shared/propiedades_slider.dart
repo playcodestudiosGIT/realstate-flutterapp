@@ -1,4 +1,3 @@
-import 'package:seo_renderer/seo_renderer.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/models/propiedad.dart';
 
@@ -19,15 +18,12 @@ class PropiedadesSlider extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: TextRenderer(
-              style: TextRendererStyle.header1,
-              child: Text(
-                sectionName,
-                style: Theme.of(context).textTheme.headline4!.copyWith(
-                    color: kPrimaryColor,
-                    fontWeight: FontWeight.w900,
-                    fontSize: (size.width > 570) ? 35 : 22),
-              ),
+            child: Text(
+              sectionName,
+              style: Theme.of(context).textTheme.headline4!.copyWith(
+                  color: kPrimaryColor,
+                  fontWeight: FontWeight.w900,
+                  fontSize: (size.width > 570) ? 35 : 22),
             ),
           ),
           SizedBox(height: kDefaultPadding),
@@ -36,12 +32,10 @@ class PropiedadesSlider extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                       children: propiedades.map<Widget>((item) {
-                    
                     return Padding(
                       padding: EdgeInsets.only(right: kDefaultPadding),
                       child: PropiedadCard(
                         propiedad: item,
-                       
                       ),
                     );
                   }).toList()))),

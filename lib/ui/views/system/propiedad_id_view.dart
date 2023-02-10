@@ -1,4 +1,3 @@
-import 'package:seo_renderer/seo_renderer.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/models/propiedad.dart';
 import 'package:somosproperties/models/proyecto.dart';
@@ -73,7 +72,7 @@ class AllBody extends StatelessWidget {
               physics: ClampingScrollPhysics(),
               children: [
                 WhiteCard(
-                    isDrag: true,
+                    isDrag: false,
                     child: (prop.galeria.length == 0)
                         ? Center(child: CircularProgressIndicator())
                         : FotoBanerPropiedad(
@@ -87,7 +86,7 @@ class AllBody extends StatelessWidget {
                       propiedad: prop,
                     )),
                 WhiteCard(
-                    isDrag: true,
+                    isDrag: false,
                     child: (prop.galeria.length == 0)
                         ? Center(child: CircularProgressIndicator())
                         : Column(
@@ -200,13 +199,12 @@ class PropiedadNombre extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextRenderer(
-              style: TextRendererStyle.header1,
-              child: Text(
-                propiedad.nombreProp,
-                style: Theme.of(context).textTheme.headline4!.copyWith(
-                    color: kPrimaryColor, fontWeight: FontWeight.w900),
-              ),
+            Text(
+              propiedad.nombreProp,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: kPrimaryColor, fontWeight: FontWeight.w900),
             ),
             SizedBox(
               height: kDefaultPadding / 2,
@@ -224,11 +222,8 @@ class PropiedadNombre extends StatelessWidget {
                   SizedBox(
                     width: kDefaultPadding,
                   ),
-                  TextRenderer(
-                    style: TextRendererStyle.header1,
-                    child: Text(proy.nombre,
-                        style: TextStyle(color: kPrimaryColor, fontSize: 22)),
-                  ),
+                  Text(proy.nombre,
+                      style: TextStyle(color: kPrimaryColor, fontSize: 22)),
                 ],
               ),
             ),
@@ -242,15 +237,12 @@ class PropiedadNombre extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                TextRenderer(
-                  style: TextRendererStyle.header2,
-                  child: Text(
-                    propiedad.direccion,
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.black.withOpacity(kBodyTextOpacity),
-                        fontWeight: FontWeight.w900,
-                        fontSize: 14),
-                  ),
+                Text(
+                  propiedad.direccion,
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                      color: Colors.black.withOpacity(kBodyTextOpacity),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 14),
                 ),
               ],
             ),
@@ -264,15 +256,12 @@ class PropiedadNombre extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                TextRenderer(
-                  style: TextRendererStyle.header2,
-                  child: Text(
-                    proy.ciudadPais,
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.black.withOpacity(kBodyTextOpacity),
-                        fontWeight: FontWeight.w900,
-                        fontSize: 14),
-                  ),
+                Text(
+                  proy.ciudadPais,
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                      color: Colors.black.withOpacity(kBodyTextOpacity),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 14),
                 ),
               ],
             ),
@@ -294,10 +283,8 @@ class PropiedadNombre extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          child: Text('${propiedad.mts2} m2',
-                              style: TextStyle(fontWeight: FontWeight.w800))),
+                      Text('${propiedad.mts2} m2',
+                          style: TextStyle(fontWeight: FontWeight.w800)),
                     ],
                     if (propiedad.habitaciones != '') ...[
                       SizedBox(
@@ -311,13 +298,10 @@ class PropiedadNombre extends StatelessWidget {
                       SizedBox(
                         width: 10,
                       ),
-                      TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          text: '${propiedad.habitaciones} Habitaciones',
-                          child: Text(
-                            '${propiedad.habitaciones}',
-                            style: TextStyle(fontWeight: FontWeight.w800),
-                          )),
+                      Text(
+                        '${propiedad.habitaciones}',
+                        style: TextStyle(fontWeight: FontWeight.w800),
+                      ),
                     ],
                     if (propiedad.banos != '') ...[
                       SizedBox(
@@ -328,11 +312,8 @@ class PropiedadNombre extends StatelessWidget {
                         size: 20,
                         color: kBodyTextColor,
                       ),
-                      TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          text: '${propiedad.banos} Baños',
-                          child: Text('${propiedad.banos}',
-                              style: TextStyle(fontWeight: FontWeight.w800))),
+                      Text('${propiedad.banos}',
+                          style: TextStyle(fontWeight: FontWeight.w800)),
                     ],
                     if (propiedad.estacionamientos != '') ...[
                       SizedBox(
@@ -343,12 +324,8 @@ class PropiedadNombre extends StatelessWidget {
                         size: 20,
                         color: kBodyTextColor,
                       ),
-                      TextRenderer(
-                          style: TextRendererStyle.paragraph,
-                          text:
-                              '${propiedad.estacionamientos} Estacionamientos',
-                          child: Text('${propiedad.estacionamientos}',
-                              style: TextStyle(fontWeight: FontWeight.w800))),
+                      Text('${propiedad.estacionamientos}',
+                          style: TextStyle(fontWeight: FontWeight.w800)),
                     ]
                   ],
                 )),
@@ -369,14 +346,12 @@ class PropiedadNombre extends StatelessWidget {
                     SizedBox(
                       width: kDefaultPadding,
                     ),
-                    TextRenderer(
-                      child: Text(
-                        'Precio de venta',
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
-                            color: Colors.black.withOpacity(kBodyTextOpacity),
-                            fontWeight: FontWeight.w900,
-                            fontSize: 14),
-                      ),
+                    Text(
+                      'Precio de venta',
+                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                          color: Colors.black.withOpacity(kBodyTextOpacity),
+                          fontWeight: FontWeight.w900,
+                          fontSize: 14),
                     ),
                     SizedBox(
                       height: kDefaultPadding,
@@ -393,12 +368,27 @@ class PropiedadNombre extends StatelessWidget {
                           ? MainAxisAlignment.start
                           : MainAxisAlignment.end,
                       children: [
-                        CustomOutlinedButton(
-                          color: kSecondaryColor,
-                          isFilled: true,
-                          onPressed: _launchUrl,
-                          text: 'Contacta a un Especialista',
-                          icon: Icons.whatsapp,
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: _launchUrl,
+                              child: Row(
+                                children: [
+                                  Icon(Icons.whatsapp),
+                                  SizedBox(
+                                    width: kDefaultPadding / 2,
+                                  ),
+                                  Text('Agente especializado'),
+                                ],
+                              ),
+                              style: ButtonStyle(
+                                side: MaterialStateProperty.all(
+                                    BorderSide(color: kSecondaryColor)),
+                                backgroundColor:
+                                    MaterialStateProperty.all(kSecondaryColor),
+                              ),
+                            )
+                          ],
                         )
                       ],
                     ),
@@ -415,53 +405,41 @@ class PropiedadNombre extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextRenderer(
-                style: TextRendererStyle.header2,
-                child: Text(
-                  'Descripción',
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 18),
-                ),
+              Text(
+                'Descripción',
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 18),
               ),
               SizedBox(
                 height: kDefaultPadding,
               ),
-              TextRenderer(
-                style: TextRendererStyle.paragraph,
-                child: Text(
-                  propiedad.descripcion,
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Colors.black.withOpacity(kBodyTextOpacity),
-                      fontWeight: FontWeight.w900,
-                      fontSize: 14),
-                ),
+              Text(
+                propiedad.descripcion,
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: Colors.black.withOpacity(kBodyTextOpacity),
+                    fontWeight: FontWeight.w900,
+                    fontSize: 14),
               ),
               SizedBox(
                 height: kDefaultPadding * 2,
               ),
-              TextRenderer(
-                style: TextRendererStyle.header2,
-                child: Text(
-                  'Detalles de la propiedad',
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: kPrimaryColor,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 18),
-                ),
+              Text(
+                'Detalles de la propiedad',
+                style: Theme.of(context).textTheme.headline6!.copyWith(
+                    color: kPrimaryColor,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 18),
               ),
               SizedBox(
                 height: kDefaultPadding,
               ),
-              TextRenderer(
-                style: TextRendererStyle.paragraph,
-                child: Text(propiedad.detalles,
-                    style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.black.withOpacity(kBodyTextOpacity),
-                        fontWeight: FontWeight.w900,
-                        fontSize: 14)),
-              ),
+              Text(propiedad.detalles,
+                  style: Theme.of(context).textTheme.headline6!.copyWith(
+                      color: Colors.black.withOpacity(kBodyTextOpacity),
+                      fontWeight: FontWeight.w900,
+                      fontSize: 14)),
               SizedBox(
                 height: kDefaultPadding * 2,
               ),
@@ -521,11 +499,22 @@ class InfoBar extends StatelessWidget {
       SizedBox(height: kDefaultPadding / 2),
       Row(
         children: [
-          CustomOutlinedButtonMini(
-            isFilled: true,
+          ElevatedButton(
             onPressed: _launchUrl,
-            text: 'Hablar con un especialista',
-            icon: Icons.whatsapp,
+            child: Row(
+              children: [
+                Icon(Icons.whatsapp),
+                SizedBox(
+                  width: kDefaultPadding / 2,
+                ),
+                Text('Agente especializado'),
+              ],
+            ),
+            style: ButtonStyle(
+              side:
+                  MaterialStateProperty.all(BorderSide(color: kSecondaryColor)),
+              backgroundColor: MaterialStateProperty.all(kSecondaryColor),
+            ),
           )
         ],
       )

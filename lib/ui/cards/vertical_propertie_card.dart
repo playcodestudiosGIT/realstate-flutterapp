@@ -1,4 +1,3 @@
-import 'package:seo_renderer/seo_renderer.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/models/propiedad.dart';
 import 'package:somosproperties/router/router.dart';
@@ -89,14 +88,10 @@ class VerticalPropiedadCard extends StatelessWidget {
                               SizedBox(
                                 width: kDefaultPadding / 2,
                               ),
-                              TextRenderer(
-                                style: TextRendererStyle.paragraph,
-                                text: '${propiedad.habitaciones} Habitaciones',
-                                child: Text(
-                                  propiedad.banos,
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
+                              Text(
+                                propiedad.banos,
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.white),
                               ),
                               SizedBox(
                                 width: kDefaultPadding,
@@ -106,13 +101,9 @@ class VerticalPropiedadCard extends StatelessWidget {
                               SizedBox(
                                 width: kDefaultPadding / 2,
                               ),
-                              TextRenderer(
-                                style: TextRendererStyle.paragraph,
-                                text: '${propiedad.banos} Baños',
-                                child: Text(propiedad.banos,
-                                    style: TextStyle(
-                                        fontSize: 12, color: Colors.white)),
-                              ),
+                              Text(propiedad.banos,
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white)),
                               SizedBox(
                                 width: kDefaultPadding,
                               ),
@@ -121,14 +112,10 @@ class VerticalPropiedadCard extends StatelessWidget {
                               SizedBox(
                                 width: kDefaultPadding / 2,
                               ),
-                              TextRenderer(
-                                style: TextRendererStyle.paragraph,
-                                text: '${propiedad.mts2} Metros Cuadrados',
-                                child: Text(
-                                  propiedad.mts2,
-                                  style: TextStyle(
-                                      fontSize: 12, color: Colors.white),
-                                ),
+                              Text(
+                                propiedad.mts2,
+                                style: TextStyle(
+                                    fontSize: 12, color: Colors.white),
                               ),
                             ],
                           )

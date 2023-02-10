@@ -1,4 +1,3 @@
-import 'package:seo_renderer/seo_renderer.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/auth_provider.dart';
 import 'package:somosproperties/providers/login_form_provider.dart';
@@ -67,11 +66,8 @@ class LoginView extends StatelessWidget {
                                       SizedBox(
                                         height: kDefaultPadding,
                                       ),
-                                      TextRenderer(
-                                          child: Text(
-                                              'Ingresa con tus credenciales',
-                                              style:
-                                                  CustomLabels.h1ColorPrimary)),
+                                      Text('Ingresa con tus credenciales',
+                                          style: CustomLabels.h1ColorPrimary),
                                       SizedBox(
                                         height: kDefaultPadding,
                                       ),

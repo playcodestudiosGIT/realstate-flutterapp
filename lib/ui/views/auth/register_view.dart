@@ -1,5 +1,3 @@
-import 'package:seo_renderer/renderers/text_renderer/text_renderer_style.dart';
-import 'package:seo_renderer/renderers/text_renderer/text_renderer_vm.dart';
 import 'package:somosproperties/constants.dart';
 import 'package:somosproperties/providers/auth_provider.dart';
 import 'package:somosproperties/providers/login_form_provider.dart';
@@ -60,18 +58,16 @@ class RegisterView extends StatelessWidget {
                                           padding: const EdgeInsets.all(
                                               kDefaultPadding),
                                           child: Image(
-                                              image: NetworkImage('https://res.cloudinary.com/dnejayiiq/image/upload/v1672446892/logo_hnizxp.png')),
+                                              image: NetworkImage(
+                                                  'https://res.cloudinary.com/dnejayiiq/image/upload/v1672446892/logo_hnizxp.png')),
                                         ),
                                       ),
                                       Divider(),
                                       SizedBox(
                                         height: kDefaultPadding,
                                       ),
-                                      TextRenderer(
-                                        style: TextRendererStyle.header2,
-                                        child: Text('Crea una nueva cuenta',
-                                            style: CustomLabels.h1ColorPrimary),
-                                      ),
+                                      Text('Crea una nueva cuenta',
+                                          style: CustomLabels.h1ColorPrimary),
                                       SizedBox(
                                         height: kDefaultPadding,
                                       ),
@@ -154,7 +150,8 @@ class RegisterView extends StatelessWidget {
                                             if (!validForm) {
                                               NotificationService
                                                   .showSnackbarError(
-                                                      msg: 'Formulario no valido',
+                                                      msg:
+                                                          'Formulario no valido',
                                                       color: Colors.red);
                                             }
                                             final authProvider =
@@ -173,13 +170,10 @@ class RegisterView extends StatelessWidget {
                                       SizedBox(height: 20),
                                       Row(
                                         children: [
-                                          TextRenderer(
-                                            style: TextRendererStyle.header2,
-                                            child: Text('Ya tienes una cuenta?',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: kPrimaryColor)),
-                                          ),
+                                          Text('Ya tienes una cuenta?',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: kPrimaryColor)),
                                           LinkText(
                                             color: kSecondaryColor,
                                             text: 'Ir al login',

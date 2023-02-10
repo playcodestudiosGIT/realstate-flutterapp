@@ -23,7 +23,6 @@ import 'package:somosproperties/providers/sidemenu_provider.dart';
 
 import 'package:somosproperties/services/local_storage.dart';
 import 'package:somosproperties/services/navigation_service.dart';
-import 'package:seo_renderer/seo_renderer.dart';
 
 void main() async {
   await LocalStorage.configurePrefs();
@@ -58,39 +57,35 @@ class AppState extends StatelessWidget {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RobotDetector(
-      debug: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Somos Properties - Venta y Alquiler de propiedades',
-        initialRoute: '/',
-        onGenerateRoute: Flurorouter.router.generator,
-        navigatorKey: NavigationService.navigatorKey,
-        navigatorObservers: [seoRouteObserver],
-        scaffoldMessengerKey: NotificationService.msgKey,
-        builder: (_, child) {
-          final authProvider = Provider.of<AuthProvider>(context);
-          Provider.of<PropiedadesProvider>(context, listen: false)
-              .getPropiedades();
-          Provider.of<ProyectosProvider>(context, listen: false).getProyectos();
-          if (authProvider.authStatus == AuthStatus.checking)
-            return SplashLayout();
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Somos Properties - Venta y Alquiler de propiedades',
+      initialRoute: '/',
+      onGenerateRoute: Flurorouter.router.generator,
+      navigatorKey: NavigationService.navigatorKey,
+      scaffoldMessengerKey: NotificationService.msgKey,
+      builder: (_, child) {
+        final authProvider = Provider.of<AuthProvider>(context);
+        Provider.of<PropiedadesProvider>(context, listen: false)
+            .getPropiedades();
+        Provider.of<ProyectosProvider>(context, listen: false).getProyectos();
+        if (authProvider.authStatus == AuthStatus.checking)
+          return SplashLayout();
 
-          if (authProvider.authStatus == AuthStatus.authenticated) {
-            return DashboardLayout(child: child!);
-          } else {
-            return DashboardLayout(child: child!);
-          }
-        },
-        scrollBehavior: MyCustomScrollBehavior(),
-        theme: ThemeData.light().copyWith(
-            hoverColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            scrollbarTheme: ScrollbarThemeData().copyWith(
-                thumbColor:
-                    MaterialStateProperty.all(Colors.grey.withOpacity(0.5)))),
-      ),
+        if (authProvider.authStatus == AuthStatus.authenticated) {
+          return DashboardLayout(child: child!);
+        } else {
+          return DashboardLayout(child: child!);
+        }
+      },
+      scrollBehavior: MyCustomScrollBehavior(),
+      theme: ThemeData.light().copyWith(
+          hoverColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          scrollbarTheme: ScrollbarThemeData().copyWith(
+              thumbColor:
+                  MaterialStateProperty.all(Colors.grey.withOpacity(0.5)))),
     );
   }
 }
